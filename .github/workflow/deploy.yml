@@ -1,0 +1,44 @@
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      promote:
+        description: 'Promote example image to production'
+        required: true
+        default: 'false'
+
+jobs:
+  build_test_stage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run tests
+        run: |
+          echo "Running example tests..."
+          # Imagine a script like: ./test.sh
+
+      - name: Build and push image
+        run: |
+          IMAGE=registry.example.com/demo-app:${GITHUB_SHA}
+          docker build -t "${IMAGE}" .
+          docker push "${IMAGE}"
+          echo "IMAGE=${IMAGE}" >> $GITHUB_ENV
+
+      - name: Deploy to staging
+        run: |
+          kubectl -n staging set image deployment/demo-app demo-app=${IMAGE}
+          kubectl -n staging rollout status deployment/demo-app --timeout=180s
+
+  promote_to_prod:
+    needs: build_test_stage
+    if: ${{ github.event.inputs.promote == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to production
+        run: |
+          kubectl -n production set image deployment/demo-app demo-app=${{ env.IMAGE }}
+          kubectl -n production rollout status deployment/demo-app --timeout=300s

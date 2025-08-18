@@ -1,0 +1,14 @@
+resources:
+  - ../../base/deployment.yaml
+
+patches:
+  - target:
+      kind: Deployment
+      name: demo-app
+    patch: |
+      - op: replace
+        path: /spec/replicas
+        value: 10
+      - op: add
+        path: /spec/template/metadata/labels/canary
+        value: "true"
