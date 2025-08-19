@@ -31,3 +31,19 @@ For background, explanations, and step-by-step context, please check my blog pos
 This repository is an example only. For more detail, see the linked blog.
 
 ---
+
+## structure
+cicd-demo-example/
+├── README.md               # Project documentation
+├── .gitignore              # Git ignore file
+├── deploy.yml              # GitHub Actions workflow
+├── index.html              # Frontend HTML file
+├── package.json            # Node.js dependencies
+├── package-lock.json       # Node.js lock file
+├── k8s/                    # Kubernetes directory
+├── node_modules/           # Node.js modules
+├── src/                    # Source code directory
+├── tests/                  # Test directory
+│   ├── app.test.js         # Test JavaScript file
+└── .github/                # GitHub directory
+    └── workflows/          # Workflows directory
