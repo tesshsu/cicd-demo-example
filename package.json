@@ -1,0 +1,26 @@
+{
+  "name": "cicd-demo-example",
+  "version": "1.0.0",
+  "description": "*This repository demonstrates a basic CI/CD setup for Kubernetes deployment using GitHub Actions and Kustomize.*",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tesshsu/cicd-demo-example.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/tesshsu/cicd-demo-example/issues"
+  },
+  "homepage": "https://github.com/tesshsu/cicd-demo-example#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "jest": "^30.0.5",
+    "supertest": "^7.1.4"
+  }
+}
